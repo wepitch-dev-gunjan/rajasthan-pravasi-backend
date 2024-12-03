@@ -6,7 +6,7 @@ const {
   updateBusiness,
   deleteBusiness,
   getBusinessesByOwner,
-} = require('../controllers/businessController');
+} = require('../controllers/businessControllers');
 
 const router = express.Router();
 

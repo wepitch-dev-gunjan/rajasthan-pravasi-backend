@@ -17,6 +17,9 @@ const userSchema = new mongoose.Schema({
   familyContact: { type: String, required: true }, // Emergency contact
   paymentStatus: { type: String, enum: ['Paid', 'Pending'], default: 'Pending' },
   isVerified: { type: Boolean, default: false }, // Aadhar verification
-}, { timestamps: true });
+}, { 
+  timestamps: true,
+  strict: false
+});
 
 module.exports = mongoose.model('User', userSchema);
