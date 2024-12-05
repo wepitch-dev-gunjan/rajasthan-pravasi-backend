@@ -1,9 +1,17 @@
 const app = require('./app');
-const dotenv = require('dotenv');
 const mongoose = require('mongoose');
+const dotenv = require('dotenv');
 
-// Load environment variables
-dotenv.config();
+// Determine the environment
+const ENVIRONMENT = process.env.NODE_ENV || 'development';
+console.log(`Environment: ${ENVIRONMENT}`); // Optional log for debugging
+
+// Load the appropriate .env file
+if (ENVIRONMENT === 'production') {
+    dotenv.config({ path: '.env.prod' }); // Load production environment variables
+} else {
+    dotenv.config({ path: '.env' }); // Load development environment variables
+}
 
 const PORT = process.env.PORT || 5000;
 const DB_URI = process.env.DB_URI;
