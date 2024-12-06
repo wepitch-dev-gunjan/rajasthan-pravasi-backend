@@ -33,6 +33,7 @@ jobs:
           chmod 400 private_key.pem                     # Set proper permissions
           ssh -i private_key.pem -o StrictHostKeyChecking=no ec2-user@13.200.63.7 << EOF
             cd /home/ec2-user/rajasthan-pravasi/rajasthan-pravasi-backend
+            sudo su
             git pull origin main
             npm install
             pm2 restart rajasthan-pravasi-backend || pm2 start src/server.js --name rajasthan-pravasi-backend
