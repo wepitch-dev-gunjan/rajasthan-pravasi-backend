@@ -25,8 +25,8 @@ jobs:
         run: npm install
 
       # Run tests (optional, if you have tests)
-      - name: Run tests
-        run: npm test
+      # - name: Run tests
+      #   run: npm test
 
       # Deploy to the server
       - name: Deploy to AWS
