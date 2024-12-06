@@ -33,11 +33,11 @@ jobs:
         env:
           PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
-          echo "$PRIVATE_KEY" > private_key.pem
-          chmod 600 private_key.pem
           ssh -i private_key.pem -o StrictHostKeyChecking=no ec2-user@13.200.63.7 << EOF
-            cd /path/to/project
+            cd /home/ec2-user/rajasthan-pravasi/rajasthan-pravasi-backend
             git pull origin main
             npm install
-            pm2 restart server.js
+            pm2 restart rajasthan-pravasi-backend || pm2 start src/server.js --name rajasthan-pravasi-backend
+            pm2 save
           EOF
+
