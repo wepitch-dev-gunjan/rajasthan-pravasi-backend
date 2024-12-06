@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
     console.log("phch rha hai")
-    res.send('welcome to rajasthan pravasi')
+    res.send('welcome to rajasthan pravasi !! CICD works?!')
 })
 
 // Routes

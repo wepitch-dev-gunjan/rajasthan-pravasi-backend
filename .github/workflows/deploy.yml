@@ -1,0 +1,41 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the repository code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Set up Node.js environment
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      # Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Run tests (optional, if you have tests)
+      - name: Run tests
+        run: npm test
+
+      # Deploy to the server
+      - name: Deploy to AWS
+        run: |
+          ssh -o StrictHostKeyChecking=no ec2-user@<AWS_PUBLIC_IP> << EOF
+            cd /path/to/project
+            git pull origin main
+            npm install
+            pm2 restart server.js
+          EOF
+        env:
+          PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
