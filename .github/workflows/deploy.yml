@@ -24,15 +24,13 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      # Run tests (optional, if you have tests)
-      # - name: Run tests
-      #   run: npm test
-
       # Deploy to the server
       - name: Deploy to AWS
         env:
           PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
+          echo "$PRIVATE_KEY" > private_key.pem          # Create the private key file
+          chmod 400 private_key.pem                     # Set proper permissions
           ssh -i private_key.pem -o StrictHostKeyChecking=no ec2-user@13.200.63.7 << EOF
             cd /home/ec2-user/rajasthan-pravasi/rajasthan-pravasi-backend
             git pull origin main
@@ -40,4 +38,3 @@ jobs:
             pm2 restart rajasthan-pravasi-backend || pm2 start src/server.js --name rajasthan-pravasi-backend
             pm2 save
           EOF
-
