@@ -23,28 +23,10 @@ if (!DB_URI) {
 }
 
 // Connect to MongoDB
-mongoose.connect(DB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-}).then(() => {
-    console.log('Database connected successfully');
-}).catch((err) => {
-    console.error('Database connection error:', err);
-});
-
-// MongoDB connection event listeners
-mongoose.connection.on('connected', () => {
-    console.log('Mongoose connected to DB');
-});
-
-mongoose.connection.on('error', (err) => {
-    console.error('Mongoose connection error:', err);
-});
-
-mongoose.connection.on('disconnected', () => {
-    console.log('Mongoose disconnected');
-});
-
+mongoose.connect(DB_URI, {})
+    .then(() => console.log('Database connected successfully'))
+    .catch((err) => console.error('Database connection error:', err));
+    
 // Graceful shutdown
 process.on('SIGINT', async () => {
     await mongoose.connection.close();
