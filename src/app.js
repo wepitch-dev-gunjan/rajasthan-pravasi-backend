@@ -8,6 +8,11 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.get('/', (req, res) => {
+    console.log("phch rha hai")
+    res.send('welcome to rajasthan pravasi')
+})
+
 // Routes
 const routes = require('./routes'); // Import main router
 app.use('/api', routes);
