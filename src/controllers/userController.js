@@ -8,7 +8,9 @@ const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret';
 // Register a new user
 exports.registerUser = async (req, res) => {
   try {
+    console.log("Register reached!!")
     const { name, email, password, aadharNumber, dob, phone, address, familyContact } = req.body;
+
 
     // Check if the user already exists
     const existingUser = await User.findOne({ email });
